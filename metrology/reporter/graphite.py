@@ -2,6 +2,7 @@ import re
 import socket
 import pickle
 import struct
+import sys
 
 from metrology.instruments import *  # noqa
 from metrology.reporter.base import Reporter
