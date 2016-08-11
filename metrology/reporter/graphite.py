@@ -126,7 +126,10 @@ class GraphiteReporter(Reporter):
 
     def _send_plaintext(self):
         if len(self.batch_buffer):
-            self.socket.sendall(self.batch_buffer + "\n")
+            if sys.version_info[0] > 2:           
+                self.socket.sendall(bytes(self.batch_buffer + '\n', 'ascii'))
+            else:                                              
+                self.socket.sendall(self.batch_buffer + "\n")
             # Reinitialze buffer and counter
             self.batch_count = 0
             self.batch_buffer = ""
